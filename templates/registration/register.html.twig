@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+        <p>Tu es deja connecter en tant que {{ app.user.userIdentifier }}</p>
+        <button><a href="{{ path('app_logout') }}">Se deconnecter</a></button>
+        <button><a href="{{ path('app_categorie_index') }}">Aller à la page d'acceuil</a></button>
+    {% else %}
+
+        <h1>Inscription</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.nom) }}
+            {{ form_row(registrationForm.prenom) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <button type="submit" class="btn">Inscription</button>
+            <button><a href="{{ path('app_login')}}">Tu as déja un compte, connecte toi</a></button>
+        {{ form_end(registrationForm) }}
+    {% endif %}
+{% endblock %}

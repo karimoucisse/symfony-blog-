@@ -1,0 +1,30 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+    <p class="h2 text-center m-5" >Categorie index</p>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <button><a href="{{ path('app_categorie_new') }}">Ajouter une categorie</a></button>
+        <button><a href="{{ path('app_article_new') }}">Ajouter un article</a></button>
+    {% endif %}
+
+    <div class="container text-center mt-3">
+        <div class="row">
+                        
+            {% for categorie in categories %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <a href="{{path('app_categorie_show', {'id': categorie.id})}}">
+                            <h2>{{ categorie.titre }}</h2>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <h1>pas de categorie trouver</h1>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
